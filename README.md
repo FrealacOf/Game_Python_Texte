@@ -1,4 +1,4 @@
-# GAME FREALAC PYTHON
+# GAME FREALAC PYTHON 0.0.0.1
 Simple Game on python
 
 # Install 
