@@ -4,7 +4,15 @@ import time
 from time import sleep, time
 from tqdm import tqdm
 import random
-
+print("------------------------------------------")
+print("   ██████╗ ██╗   ██╗███╗   ██╗██╗██╗  ██╗")
+print("  ██╔═══██╗╚██╗ ██╔╝████╗  ██║██║╚██╗██╔╝")
+print("  ██║   ██║ ╚████╔╝ ██╔██╗ ██║██║ ╚███╔╝ ")
+print("  ██║   ██║  ╚██╔╝  ██║╚██╗██║██║ ██╔██╗ ")
+print("  ╚██████╔╝   ██║   ██║ ╚████║██║██╔╝ ██╗")
+print("------------------------------------------")
+print("")
+print("")
 ### PSEUDO ASK
 player = input("Qu'elle est votre pseudo ? > ")
 
@@ -153,16 +161,27 @@ def fight_blob(blob_niv1, healt):
                 print("Blob Niv : 1\nPv : 10")
                 print("Vous attacker !")
                 sleep(1)
-                if couteau_buy == True:
-                    blob_niv1 -= 5
-                if sword_buy == True:
-                    blob_niv1 -= 10
-                if pistole_buy == True:
-                    blob_niv1 -= 15
+                if force >= 1:
+                    if couteau_buy == True:
+                        blob_niv1 -= 5 * force
+                    if sword_buy == True:
+                        blob_niv1 -= 10 * force
+                    if pistole_buy == True:
+                        blob_niv1 -= 15 * force
+                else:
+                    if couteau_buy == True:
+                        blob_niv1 -= 5
+                    if sword_buy == True:
+                        blob_niv1 -= 10
+                    if pistole_buy == True:
+                        blob_niv1 -= 15
                 print("Pv Blob: ",blob_niv1)  
                 print("Il vous attack !")
                 sleep(1)
-                healt -= 5
+                if resistance >= 1:
+                    healt -= 5 / resistance
+                else:
+                    healt -= 5
                 print("Vos Pv: ",healt)
         else:
             pass
@@ -219,16 +238,27 @@ def fight_sorcier(sorcier_niv1, healt):
                 print("Sorcier Niv : 1\nPv : 10")
                 print("Vous attacker !")
                 sleep(1)
-                if couteau_buy == True:
-                    sorcier_niv1 -= 5
-                if sword_buy == True:
-                    sorcier_niv1 -= 10
-                if pistole_buy == True:
-                    sorcier_niv1 -= 15
+                if force >= 1:
+                    if couteau_buy == True:
+                        blob_niv1 -= 5 * force
+                    if sword_buy == True:
+                        blob_niv1 -= 10 * force
+                    if pistole_buy == True:
+                        blob_niv1 -= 15 * force
+                else:
+                    if couteau_buy == True:
+                        blob_niv1 -= 5
+                    if sword_buy == True:
+                        blob_niv1 -= 10
+                    if pistole_buy == True:
+                        blob_niv1 -= 15
                 print("Pv Sorcier: ",sorcier_niv1)  
                 print("Il vous attack !")
                 sleep(1)
-                healt -= 10
+                if resistance >= 1:
+                    healt -= 10 / resistance
+                else:
+                    healt -= 10
                 print("Vos Pv: ",healt)
         else:
             pass   
