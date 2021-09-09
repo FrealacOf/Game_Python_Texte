@@ -4,6 +4,12 @@ import time
 from time import sleep, time
 from tqdm import tqdm
 import random
+import json
+from ast import literal_eval
+
+nom_fichier = 'information_player.json'
+
+
 print("------------------------------------------")
 print("   ██████╗ ██╗   ██╗███╗   ██╗██╗██╗  ██╗")
 print("  ██╔═══██╗╚██╗ ██╔╝████╗  ██║██║╚██╗██╔╝")
@@ -44,6 +50,25 @@ pistole_buy = False
 
 fight_blob_niv1 = False
 
+### JSON
+def ecrire_info():
+    global player
+    global force
+    global resistance
+    global healt
+    global wallet
+    global couteau
+    global sword
+    global pistole
+    global xp
+    global levels
+    global levels_check
+    global couteau_buy
+    global sword_buy
+    global pistole_buy
+    with open(nom_fichier ,'w') as fichier:
+        json.dump(str({'name:': player, 'force:': force, 'resistance:': resistance, 'Pv:': healt, 'Money:': wallet, 'Couteau:': couteau, 'Epee:': sword, 'Pistolet': pistole, 'Xp:': xp, 'Levels:': levels, 'Levels_Check:': levels_check, 'Couteau_Buy': couteau_buy, 'Sword_Buy:': sword_buy, 'Gun_Buy:': pistole_buy}), fichier)
+
 ### START
 print("Bienvenue",player," Vous avez ",wallet,"$ Votre nombre de vie ",healt,"pv")
 
@@ -64,6 +89,7 @@ def list_weapon():
             print("Il vous reste {}".format(wallet))
             couteau_buy=True
             print(couteau_buy)
+            ecrire_info()
     if list_weapon == "Epee":
         if wallet < 100:
             print("Vous n'avez pas 100 $, votre argent {}$".format(wallet))
@@ -73,6 +99,7 @@ def list_weapon():
             print("Il vous reste {}".format(wallet))
             sword_buy=True
             print(sword_buy)
+            ecrire_info()
     if list_weapon == "Pistolet":
         if wallet < 150:
             print("Vous n'avez pas 150 $, votre argent {}$".format(wallet))
@@ -82,6 +109,7 @@ def list_weapon():
             print("Il vous reste {}".format(wallet))
             pistole_buy=True
             print(pistole_buy)  
+            ecrire_info()
     if list_weapon == "Exit":
         pass
             
@@ -98,6 +126,10 @@ def walk2():
         sleep(0.1) #base 1
         
         
+def save():
+    for i in tqdm(range(10)):
+        sleep(0.1) #base 1
+        
 ### XPS
 def xp_level_up():
     global levels_check
@@ -109,16 +141,19 @@ def xp_level_up():
         xp = 0
         levels_check += 20
         levels += 1 
+        ecrire_info()
         print("Bravo vous etes niveau {}".format(levels))
-        ask_speciality_updates = input("Vous voulez ameliorer quoi ? (force/resistance)\n> ")
+        ask_speciality_updates = input("Que voulez vous améliorer ? (force/resistance)\n> ")
         if ask_speciality_updates == "force":
             force += 1
             print("Vous avez gagnez 1 niveau de FORCE")
             print("Force > ",force, "\nXp Next Level > ",levels_check)
+            ecrire_info()
         if ask_speciality_updates == "resistance":
             resistance += 1
             print("Vous avez gagnez 1 niveau de RESISTANCE")
             print("Resistance > ",resistance, "\nXp Next Level > ",levels_check)
+            ecrire_info()
 
         
 ### MOBS     
@@ -133,7 +168,7 @@ def fight_blob(blob_niv1, healt):
     global sword_buy
     global pistole_buy
     while True:
-        ask_attack_blob = input("Vous voulez l'attacker ? (Oui/Non)\nSTATS\nPv : 10\nDegat : 5\n> ")
+        ask_attack_blob = input("Voulez vous l'attaquer ? (Oui/Non)\nSTATS\nPv : 10\nDegat : 5\n> ")
         if ask_attack_blob == "Oui":
             while True:
                 if xp >= levels_check:
@@ -143,7 +178,7 @@ def fight_blob(blob_niv1, healt):
                 if blob_niv1 == 0:
                     print(blob_niv1)
                     print('Vous avez gagnez !')
-                    xp += 10
+                    xp += 5
                     wallet += 20
                     healt = 20
                     print("Vous gagnez 20$ + ",xp,"XP, TOTAL : ",wallet,"$ XP : ",xp)
@@ -186,11 +221,11 @@ def fight_blob(blob_niv1, healt):
         else:
             pass
                     
-        ask_weapon_buy3 = input("Vous voulez voir le shop ? (Oui/Non)")
+        ask_weapon_buy3 = input("Voulez vous voir le magasin ? (Oui/Non)")
         if ask_weapon_buy3 == "Oui":
             list_weapon()
         else:
-            ask_walk_distance = input("Au loin vous voyez un monstre vous voulez l'attacker ? (Oui/Non)")
+            ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)")
             if ask_walk_distance == "Oui":
                 walk2()
                 if random.randint(0, 1) == 0:
@@ -201,6 +236,12 @@ def fight_blob(blob_niv1, healt):
                     print("Vous avez trouver un SORCIER")
                     sleep(1)
                     fight_sorcier(sorcier_niv1, healt)
+            if ask_walk_distance == "Exit":
+                print("Sauvegarde ! (Veilliez ne pas fermer)")
+                ecrire_info()
+                save()
+                exit(0)
+                
     
 def fight_sorcier(sorcier_niv1, healt):
     global levels_check
@@ -210,7 +251,7 @@ def fight_sorcier(sorcier_niv1, healt):
     global sword_buy
     global pistole_buy
     while True:
-        ask_attack_sorcier = input("Vous voulez l'attacker ? (Oui/Non)\nSTATS\nPv : 20\nDegat : 10\n> ")
+        ask_attack_sorcier = input("Voulez vous l'attaquer ? (Oui/Non)\nSTATS\nPv : 20\nDegat : 10\n> ")
         if ask_attack_sorcier == "Oui":
             while True:
                 if xp >= levels_check:
@@ -263,11 +304,11 @@ def fight_sorcier(sorcier_niv1, healt):
         else:
             pass   
                     
-        ask_weapon_buy3 = input("Vous voulez voir le shop ? (Oui/Non)")
+        ask_weapon_buy3 = input("Vous voulez voir le magasin ? (Oui/Non)")
         if ask_weapon_buy3 == "Oui":
             list_weapon()
         else:
-            ask_walk_distance = input("Au loin vous voyez un monstre vous voulez l'attacker ? (Oui/Non)")
+            ask_walk_distance = input("Au loin vous voyez un monstre vous voulez l'attacker ? (Oui/Exit)")
             if ask_walk_distance == "Oui":
                 walk2()
                 if random.randint(0, 1) == 0:
@@ -278,6 +319,11 @@ def fight_sorcier(sorcier_niv1, healt):
                     print("Vous avez trouver un SORCIER")
                     sleep(1)
                     fight_sorcier(sorcier_niv1, healt)
+            if ask_walk_distance == "Exit":
+                print("Sauvegarde ! (Veilliez ne pas fermer)")
+                ecrire_info()
+                save()
+                exit(0)
 walk()
 
 ask_weapon_png = input("Vous avez vu un vendeur d'arme vous voulez le voir ? (Oui/Non)")
