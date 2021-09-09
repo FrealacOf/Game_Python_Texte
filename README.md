@@ -1,6 +1,12 @@
-# GAME FREALAC PYTHON 0.0.0.2
-Simple Game on python
-
+# GAME FREALAC PYTHON 0.0.0.4
+Updates 0.0.0.4:
+```
++ XP LEVELS
++ Force Levels
++ Resistance Levels
++ New Mobs (Sorcier)
++ Fix Bug
+```
 # Install 
 
 ## Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Menu or [py](https://www.python.org/downloads/).
