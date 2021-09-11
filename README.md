@@ -27,7 +27,7 @@ Updates 0.0.0.4:
 # Boss
 ```
 + Oynix (PV:20 000/Degats: 100) Taux d'apparition 0.01 [RECOMPENSE : Marchand secret; Quetes Secrets; 
-                                                                                      Débloque une épee; 10 000 pieces]
+                                                       Débloque une épee; 10 000 pieces]
 + The End (PV:40 000/Degats: 200) [Pour debloquez le boss vous devez tuez Oynix + 
                                   Ils coutents 400 000 pieces au pres du marchand secret]
 ```
