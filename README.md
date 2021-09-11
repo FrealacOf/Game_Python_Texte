@@ -7,6 +7,16 @@ Updates 0.0.0.4:
 + New Mobs (Sorcier)
 + Fix Bug
 ```
+
+Futurs Updates
+```
++ Ajouts de quêtes (à une partie)
++ Ajouts de quêtes (à deux parties)
++ Ajouts de boss (qu'on débloque grâce a des quêtes)
++ Ajouts de nouveaux marchands
++ Ajouts de nouveaux pouvoir
+* Mieux décorer les textes
+```
 # Install 
 
 ## Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Menu or [py](https://www.python.org/downloads/).
