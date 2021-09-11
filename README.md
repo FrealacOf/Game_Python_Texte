@@ -15,7 +15,9 @@ Updates 0.0.0.4:
 > 1: pip install tqdm
 > 2: Open start.bat
 
-## FUTURS UPDATES
+
+
+# FUTURS UPDATES
 # SHOP
 ```
 + Marchand de quêtes:
