@@ -1,4 +1,5 @@
 ### IMPORT
+from enum import Flag
 import time
 ### FROM
 from time import sleep, time
@@ -22,11 +23,18 @@ print("")
 ### PSEUDO ASK
 player = input("Qu'elle est votre pseudo ?\n> ")
 
+# marchand quete
+weapon_png_2 = False
+oynix_boss = False
+
 ### QUETES
 x_blob_kill = 0 #10 blobs / 50 pieces
 x_blob_kill_running = False
 xx_sorcier_kill = 0 #20 sorciers / 500 pieces
 xx_sorcier_kill_running = False
+
+force_niveaux_10 = False
+resistance_niveaux_10 = False
 
 ### ### XP +
 force = 1
@@ -60,6 +68,11 @@ couteau_buy = False
 sword_buy = False
 pistole_buy = False
 
+the_destructor = False
+the_ice_of_king = False
+
+the_destructor_prix = 5000 # Degats : 50
+the_ice_of_king_prix = 12000 # Degats : 100
 
 fight_blob_niv1 = False
 
@@ -86,31 +99,79 @@ def ecrire_info():
 print("Bienvenue",player," Vous avez ",wallet,"$ Votre nombre de vie ",healt,"pv")
 
 ### DEF
+
+def marchand_weapon2():
+    global wallet
+    global the_destructor_prix
+    global the_destructor
+    global the_ice_of_king_prix
+    global couteau_buy
+    global sword_buy
+    global pistole_buy
+    global the_ice_of_king
+    print("____________________________________________")
+    ask_weapon2 = input("Vous voulez qu'elle arme ?\n1: The Destructor (Degats: 50/Prix:5000)\n2: The Ice of King (Degats: 100/Prix: 12 000)\n1 ou 2 ou Exit\n> ")
+    if ask_weapon2 == "1":
+        couteau_buy=False
+        sword_buy=False
+        pistole_buy=False
+        wallet -= the_destructor_prix
+        the_destructor=True
+        print("Il vous reste, {}$".format(wallet))
+        print("____________________________________________")
+    if ask_weapon2 == "2":
+        couteau_buy=False
+        sword_buy=False
+        pistole_buy=False
+        the_destructor=False
+        wallet -= the_ice_of_king_prix
+        the_ice_of_king=True
+        print("Il vous reste, {}$".format(wallet))
+        print("____________________________________________")
+    if ask_weapon2 == "Exit":
+        pass
+    
 # QUETES (1partie)
 def shop_quest():
     global x_blob_kill_running
     global xx_sorcier_kill_running
+    global force_niveaux_10
+    global resistance_niveaux_10
     ask_quete_shop = input("Hey vous voulez voir les quetes ? (Oui/Non)\n> ")
     if ask_quete_shop == "Oui":
         print("\n")
-        ask_choice_quete = input("Voici la listes des quetes\n1:Tuez 10 Blobs\n2:Tuez 20 sorciers\n1 ou 2 ?\n> ")
+        ask_choice_quete = input("Voici la listes des quetes\n1:Tuez 10 Blobs\n2:Tuez 20 sorciers\n3: Quetes a 2 parties\n1 ou 2 ou 3 ?\n> ")
         if ask_choice_quete == "1":
             print("____________________________________________")
-            x_blob_kill_running = True
+            x_blob_kill_running=True
             print(x_blob_kill_running)
             print("Vous avez pris la quete des 10 blobs\nRécompense : 50$\nBonne Chance!")
             print("____________________________________________")
         if ask_choice_quete == "2":
             print("____________________________________________")
-            xx_sorcier_kill_running = True
+            xx_sorcier_kill_running=True
             print(xx_sorcier_kill_running)
             print("Vous avez pris la quete des 20 sorciers\nRécompense : 800$\nBonne Chance!")
             print("____________________________________________")
+        if ask_choice_quete == "3":
+            print("____________________________________________")
+            ask_choice_quete_2party = input("Voici la quete a deux parties\n1:Force Niveaux 10/Resistance Niveaux 10\n(Oui/Non) ?\n> ")
+            print("____________________________________________")
+            if ask_choice_quete_2party == "Oui":
+                print("____________________________________________")
+                force_niveaux_10=True
+                resistance_niveaux_10=True
+                print("Bonne chance !")
+                print("____________________________________________")
+            if ask_choice_quete_2party == "Non":
+                pass
             
 ### SHOP 
 def list_weapon():
     global wallet
     global couteau_buy
+    global the_destructor
+    global the_ice_of_king
     global sword_buy
     global pistole_buy
     list_weapon = input("Voici la liste des armes ! \n1: Couteau\n2: Epee\n3: Pistolet\n4: Exit\n> ")
@@ -132,6 +193,7 @@ def list_weapon():
             print("Vous avez une epee !")
             print("Il vous reste {}".format(wallet))
             sword_buy=True
+            couteau_buy=False
             print(sword_buy)
             ecrire_info()
     if list_weapon == "Pistolet":
@@ -143,6 +205,8 @@ def list_weapon():
             print("Il vous reste {}".format(wallet))
             pistole_buy=True
             print(pistole_buy)  
+            couteau_buy=False
+            sword_buy=False
             ecrire_info()
     if list_weapon == "Exit":
         pass
@@ -175,6 +239,7 @@ def list_armor():
             print("Vous avez une Armure en Or !")
             print("Il vous reste {}".format(wallet))
             armor_or_buy=True
+            armor_fer_buy = False
             print(armor_or_buy)
             ecrire_info()
     if list_weapon == "Diamant":
@@ -185,6 +250,8 @@ def list_armor():
             print("Vous avez une Armure en Diamant !")
             print("Il vous reste {}".format(wallet))
             armor_diamant_buy=True
+            armor_fer_buy=False
+            armor_or_buy=False
             print(armor_diamant_buy)  
             ecrire_info()
     if list_weapon == "Exit":
@@ -243,6 +310,10 @@ def xp_level_up():
 
 def quest_checks():
     global wallet
+    global oynix_boss
+    global weapon_png_2
+    global force
+    global resistance
     global x_blob_kill_running  
     global x_blob_kill
     global xx_sorcier_kill_running
@@ -265,6 +336,14 @@ def quest_checks():
             print("______________________________________________________________")
         else:
             pass
+    if force >= 10:
+        if resistance >= 10:
+            oynix_boss = True
+            weapon_png_2 = True
+            print("______________________________________________________________")
+            print("BRAVO *claps*claps*\nVous avez finis la quete!\nVous debloquez un nouveau marchand et un nouveau Boss (Oynix)")
+            print("______________________________________________________________")       
+            marchand_weapon2()
     else:
         pass
 
@@ -278,6 +357,8 @@ def fight_blob():
     global levels
     global x_blob_kill
     global xp
+    global the_destructor
+    global the_ice_of_king
     global wallet
     global couteau_buy
     global sword_buy
@@ -324,6 +405,10 @@ def fight_blob():
                         blob_niv1 -= 10 * force
                     if pistole_buy == True:
                         blob_niv1 -= 15 * force
+                    if the_destructor == True:
+                        blob_niv1 -= 50 * force
+                    if the_ice_of_king == True:
+                        blob_niv1 -= 100 * force
                 else:
                     if couteau_buy == True:
                         blob_niv1 -= 5
@@ -331,6 +416,10 @@ def fight_blob():
                         blob_niv1 -= 10
                     if pistole_buy == True:
                         blob_niv1 -= 15
+                    if the_destructor == True:
+                        blob_niv1 -= 50
+                    if the_ice_of_king == True:
+                        blob_niv1 -= 100
                 print("Pv Blob: ",blob_niv1) 
                 print("Il vous attack !")
                 sleep(1)
@@ -362,6 +451,13 @@ def fight_blob():
             list_armor()
         if ask_weapon_buy3 == "Quetes":
             shop_quest()
+
+        if weapon_png_2 == True:
+            ask_new_png_weapon = input("Voulez voir le marchand supreme ? (Oui/Non)\n> ")
+            if ask_new_png_weapon == "Oui":
+                marchand_weapon2()
+            if ask_new_png_weapon == "Non":
+                pass
         else:
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
@@ -389,6 +485,8 @@ def fight_sorcier():
     global healt
     global sorcier_niv1
     global levels_check
+    global the_destructor
+    global the_ice_of_king
     global xp
     global wallet
     global couteau_buy
@@ -437,6 +535,10 @@ def fight_sorcier():
                         sorcier_niv1 -= 10 * force
                     if pistole_buy == True:
                         sorcier_niv1 -= 15 * force
+                    if the_destructor == True:
+                        sorcier_niv1 -= 50 * force
+                    if the_ice_of_king == True:
+                        sorcier_niv1 -= 100 * force
                 else:
                     if couteau_buy == True:
                         sorcier_niv1 -= 5
@@ -444,6 +546,10 @@ def fight_sorcier():
                         sorcier_niv1 -= 10
                     if pistole_buy == True:
                         sorcier_niv1 -= 15
+                    if the_destructor == True:
+                        sorcier_niv1 -= 50
+                    if the_ice_of_king == True:
+                        sorcier_niv1 -= 100
                 print("Pv Sorcier: ",sorcier_niv1)  
                 print("Il vous attack !")
                 sleep(1)
@@ -475,6 +581,14 @@ def fight_sorcier():
             list_armor()
         if ask_weapon_buy3 == "Quetes":
             shop_quest()
+            
+        if weapon_png_2 == True:
+            ask_new_png_weapon = input("Voulez voir le marchand supreme ? (Oui/Non)\n> ")
+            if ask_new_png_weapon == "Oui":
+                marchand_weapon2()
+            if ask_new_png_weapon == "Non":
+                pass
+            
         else:
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
