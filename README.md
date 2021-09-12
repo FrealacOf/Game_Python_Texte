@@ -1,9 +1,12 @@
-# GAME FREALAC PYTHON 0.0.1.0
-Updates 0.0.1.0:
+# GAME FREALAC PYTHON 0.0.1.5
+Updates 0.0.1.5:
 ```
 + Design
 + Armures Rajoutées 
 + Quêtes Tuez 10 blobs / Tuez 20 sorciers
++ New Weapons:
+  The Destructor (Prices: 5000/Degats: 50)
+  The Ice Of King (Prices: 12 000/Degats: 100)
 + Fix Bug
 ```
 
@@ -31,7 +34,5 @@ Updates 0.0.1.0:
 ```
 # Armes
 ```
-+ The destructor (Degats : 50/Prix:5000)
-+ The Ice of King (Degats : 100/Prix: 12 000)
 + The Neants (Degats: 200/Prix: 40 000 + Vous tuez le boss Oynix)
 ```
