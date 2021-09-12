@@ -30,7 +30,7 @@ resistance = 0
 
 
 healt = 20
-wallet = 100000
+wallet = 50
 
 couteau = 50 # Degat 5
 sword = 100 # Degat 10
