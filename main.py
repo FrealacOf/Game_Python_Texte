@@ -22,11 +22,15 @@ print("")
 ### PSEUDO ASK
 player = input("Qu'elle est votre pseudo ?\n> ")
 
-### DONNES
+### QUETES
+x_blob_kill = 0 #10 blobs / 50 pieces
+x_blob_kill_running = False
+xx_sorcier_kill = 0 #20 sorciers / 500 pieces
+xx_sorcier_kill_running = False
 
 ### ### XP +
-force = 0
-resistance = 0
+force = 1
+resistance = 1
 
 
 healt = 20
@@ -82,6 +86,27 @@ def ecrire_info():
 print("Bienvenue",player," Vous avez ",wallet,"$ Votre nombre de vie ",healt,"pv")
 
 ### DEF
+# QUETES (1partie)
+def shop_quest():
+    global x_blob_kill_running
+    global xx_sorcier_kill_running
+    ask_quete_shop = input("Hey vous voulez voir les quetes ? (Oui/Non)\n> ")
+    if ask_quete_shop == "Oui":
+        print("\n")
+        ask_choice_quete = input("Voici la listes des quetes\n1:Tuez 10 Blobs\n2:Tuez 20 sorciers\n1 ou 2 ?\n> ")
+        if ask_choice_quete == "1":
+            print("____________________________________________")
+            x_blob_kill_running = True
+            print(x_blob_kill_running)
+            print("Vous avez pris la quete des 10 blobs\nRécompense : 50$\nBonne Chance!")
+            print("____________________________________________")
+        if ask_choice_quete == "2":
+            print("____________________________________________")
+            xx_sorcier_kill_running = True
+            print(xx_sorcier_kill_running)
+            print("Vous avez pris la quete des 20 sorciers\nRécompense : 800$\nBonne Chance!")
+            print("____________________________________________")
+            
 ### SHOP 
 def list_weapon():
     global wallet
@@ -215,12 +240,43 @@ def xp_level_up():
             ecrire_info()
             print("____________________________________________")
         
+
+def quest_checks():
+    global wallet
+    global x_blob_kill_running  
+    global x_blob_kill
+    global xx_sorcier_kill_running
+    global xx_sorcier_kill
+    if x_blob_kill_running == True:
+        if x_blob_kill >= 10:
+            wallet += 50
+            x_blob_kill_running = False
+            print("__________________________________________________________")
+            print("Bravo vous avez finis la quete des 10 blobs gagnez 50$, {}".format(wallet))
+            print("__________________________________________________________")
+        else:
+            pass
+    if xx_sorcier_kill_running == True:
+        if xx_sorcier_kill >= 20:
+            wallet += 500
+            xx_sorcier_kill_running = False
+            print("______________________________________________________________")
+            print("Bravo vous avez finis la quete des 20 sorciers gagnez 500$, {}".format(wallet))
+            print("______________________________________________________________")
+        else:
+            pass
+    else:
+        pass
+
 ### MOBS     
-def fight_blob(blob_niv1, healt):
+def fight_blob():
+    global healt
+    global blob_niv1
     global levels_check
     global force
     global resistance
     global levels
+    global x_blob_kill
     global xp
     global wallet
     global couteau_buy
@@ -234,6 +290,7 @@ def fight_blob(blob_niv1, healt):
                     xp_level_up()
                 else:
                     pass
+                quest_checks()
                 if blob_niv1 == 0:
                     print("____________________________________________")
                     print(blob_niv1)
@@ -243,6 +300,7 @@ def fight_blob(blob_niv1, healt):
                     healt = 20
                     print("Vous gagnez 20$ + ",xp,"XP, TOTAL : ",wallet,"$ XP : ",xp)
                     blob_niv1 = 10
+                    x_blob_kill += 1
                     print("____________________________________________")
                     break
                 if healt == 0:
@@ -297,11 +355,13 @@ def fight_blob(blob_niv1, healt):
         else:
             pass
               
-        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Enter = Exit)\n> ")
+        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Quetes/Enter = Exit)\n> ")
         if ask_weapon_buy3 == "Armes":
             list_weapon()
         if ask_weapon_buy3 == "Armures":
             list_armor()
+        if ask_weapon_buy3 == "Quetes":
+            shop_quest()
         else:
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
@@ -311,25 +371,29 @@ def fight_blob(blob_niv1, healt):
                     print("Vous avez trouvez un BLOB")
                     sleep(1)
                     print("____________________________________________")
-                    fight_blob(blob_niv1, healt)
+                    fight_blob()
                 else:
                     print("____________________________________________")
                     print("Vous avez trouver un SORCIER")
                     sleep(1)
                     print("____________________________________________")
-                    fight_sorcier(sorcier_niv1, healt)
+                    fight_sorcier()
             if ask_walk_distance == "Exit":
                 print("Sauvegarde ! (Veilliez ne pas fermer)")
                 ecrire_info()
                 save()
                 exit(0)
     
-def fight_sorcier(sorcier_niv1, healt):
+    
+def fight_sorcier():
+    global healt
+    global sorcier_niv1
     global levels_check
     global xp
     global wallet
     global couteau_buy
     global sword_buy
+    global xx_sorcier_kill
     global pistole_buy
     while True:
         ask_attack_sorcier = input("Voulez vous l'attaquer ? (Oui/Non)\nSTATS\nPv : 20\nDegat : 10\n> ")
@@ -339,6 +403,7 @@ def fight_sorcier(sorcier_niv1, healt):
                     xp_level_up()
                 else:
                     pass
+                quest_checks()
                 if sorcier_niv1 == 0:
                     print("____________________________________________")
                     print(sorcier_niv1)
@@ -348,6 +413,7 @@ def fight_sorcier(sorcier_niv1, healt):
                     healt = 20
                     print("Vous gagnez 40$ + ",xp,"XP TOTAL : ",wallet,"$ XP : ",xp)
                     sorcier_niv1 = 20
+                    xx_sorcier_kill += 1
                     print("____________________________________________")
                     break
                 if healt == 0:
@@ -366,18 +432,18 @@ def fight_sorcier(sorcier_niv1, healt):
                 sleep(1)
                 if force >= 1:
                     if couteau_buy == True:
-                        blob_niv1 -= 5 * force
+                        sorcier_niv1 -= 5 * force
                     if sword_buy == True:
-                        blob_niv1 -= 10 * force
+                        sorcier_niv1 -= 10 * force
                     if pistole_buy == True:
-                        blob_niv1 -= 15 * force
+                        sorcier_niv1 -= 15 * force
                 else:
                     if couteau_buy == True:
-                        blob_niv1 -= 5
+                        sorcier_niv1 -= 5
                     if sword_buy == True:
-                        blob_niv1 -= 10
+                        sorcier_niv1 -= 10
                     if pistole_buy == True:
-                        blob_niv1 -= 15
+                        sorcier_niv1 -= 15
                 print("Pv Sorcier: ",sorcier_niv1)  
                 print("Il vous attack !")
                 sleep(1)
@@ -402,11 +468,13 @@ def fight_sorcier(sorcier_niv1, healt):
         else:
             pass   
         
-        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Enter = Exit)\n> ")
+        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Quetes/Enter = Exit)\n> ")
         if ask_weapon_buy3 == "Armes":
             list_weapon()
         if ask_weapon_buy3 == "Armures":
             list_armor()
+        if ask_weapon_buy3 == "Quetes":
+            shop_quest()
         else:
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
@@ -416,13 +484,13 @@ def fight_sorcier(sorcier_niv1, healt):
                     print("Vous avez trouvez un BLOB")
                     sleep(1)
                     print("____________________________________________")
-                    fight_blob(blob_niv1, healt)
+                    fight_blob()
                 else:
                     print("____________________________________________")
                     print("Vous avez trouver un SORCIER")
                     sleep(1)
                     print("____________________________________________")
-                    fight_sorcier(sorcier_niv1, healt)
+                    fight_sorcier()
             if ask_walk_distance == "Exit":
                 print("Sauvegarde ! (Veilliez ne pas fermer)")
                 ecrire_info()
@@ -451,7 +519,12 @@ if ask_armor_png == "Oui":
     pass
     ### ASK WEAPON START
 
-
+ask_quest_png = input("Vous voulez voir le vendeur des quetes ? (Oui/Non)\n> ")
+if ask_quest_png == "Oui":
+    walk()
+    shop_quest()
+if ask_quest_png == "Non":
+    pass
 
 
 ask_walk_distance = input("Au loin vous voyez un monstre vous voulez l'attacker ? (Oui/Non)\n> ")
@@ -462,13 +535,13 @@ if ask_walk_distance == "Oui":
         print("Vous avez trouvez un BLOB")
         sleep(1)
         print("____________________________________________")
-        fight_blob(blob_niv1, healt)
+        fight_blob()
     else:
         print("____________________________________________")
         print("Vous avez trouver un SORCIER")
         sleep(1)
         print("____________________________________________")
-        fight_sorcier(sorcier_niv1, healt)
+        fight_sorcier()
 else:
     print("____________________________________________")
     print("Fin de la beta !")
