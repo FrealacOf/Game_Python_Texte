@@ -41,7 +41,7 @@ Updates 0.0.0.4:
 ```
 # Armures
 ```
-+ Armure en fer (500 pieces/Degats divisez par 0.5)
-+ Armure en Or (1000 pieces/Degats divisez par 1)
-+ Armure en Diamant (2000 pieces/Degats divisez par 2)
++ Armure en fer (500 pieces/Degats divisez par 0.5) (Fait)
++ Armure en Or (1000 pieces/Degats divisez par 1) (Fait)
++ Armure en Diamant (2000 pieces/Degats divisez par 2) (Fait)
 ```
