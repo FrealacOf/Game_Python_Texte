@@ -30,15 +30,15 @@ resistance = 0
 
 
 healt = 20
-wallet = 100
+wallet = 100000
 
 couteau = 50 # Degat 5
 sword = 100 # Degat 10
 pistole = 150 # Degat 20
 
-armor_fer = 250 # /0.5
-armor_or = 350 # /1
-armor_diamant = 500 #/1.5
+armor_fer = 500 # /0.5
+armor_or = 1000 # /1
+armor_diamant = 2000 #/2
 
 xp = 0
 levels = 0
@@ -122,6 +122,49 @@ def list_weapon():
     if list_weapon == "Exit":
         pass
     
+    
+def list_armor():
+    global armor_or
+    global armor_fer
+    global armor_diamant
+    global wallet
+    global armor_diamant_buy
+    global armor_fer_buy
+    global armor_or_buy
+    list_weapon = input("Voici la liste des armes ! \n1: Armure En Fer\n2: Armure En Or\n3: Armure En Diamant\n4: Exit\n(Repondez par (Fer/Or/Diamant))\n> ")
+    if list_weapon == "Fer":
+        if wallet < 500:
+            print("Vous n'avez pas 500 $, votre argent {}$".format(wallet))
+        if wallet >= 500:
+            wallet -= armor_fer
+            print("Vous avez une Armure en Fer !")
+            print("Il vous reste {}".format(wallet))
+            armor_fer_buy=True
+            print(armor_fer_buy)
+            ecrire_info()
+    if list_weapon == "Or":
+        if wallet < 1000:
+            print("Vous n'avez pas 1000 $, votre argent {}$".format(wallet))
+        if wallet >= 1000:
+            wallet -= armor_or
+            print("Vous avez une Armure en Or !")
+            print("Il vous reste {}".format(wallet))
+            armor_or_buy=True
+            print(armor_or_buy)
+            ecrire_info()
+    if list_weapon == "Diamant":
+        if wallet < 2000:
+            print("Vous n'avez pas 2000 $, votre argent {}$".format(wallet))
+        if wallet >= 2000:
+            wallet -= armor_diamant    
+            print("Vous avez une Armure en Diamant !")
+            print("Il vous reste {}".format(wallet))
+            armor_diamant_buy=True
+            print(armor_diamant_buy)  
+            ecrire_info()
+    if list_weapon == "Exit":
+        pass
+
 
 
 ### WALK BAR           
@@ -234,17 +277,31 @@ def fight_blob(blob_niv1, healt):
                 print("Il vous attack !")
                 sleep(1)
                 if resistance >= 1:
-                    healt -= 5 / resistance                     
+                    healt -= 5 / resistance
+                    if armor_fer_buy == True:
+                        healt += 1
+                    if armor_or_buy == True:
+                        healt += 2
+                    if armor_diamant_buy == True:
+                        healt += 3                          
                 else:
-                    healt -= 5
-
+                    if armor_fer_buy == True:
+                        healt -= 5 / 0.5
+                    if armor_or_buy == True:
+                        healt -= 5 / 1
+                    if armor_diamant_buy == True:
+                        healt -= 5 / 2
+                    else:
+                        healt -= 5
                 print("Vos Pv: ",healt)
         else:
             pass
               
-        ask_weapon_buy3 = input("Voulez vous voir le magasin ? (Oui/Non)\n> ")
-        if ask_weapon_buy3 == "magasin":
+        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Enter = Exit)\n> ")
+        if ask_weapon_buy3 == "Armes":
             list_weapon()
+        if ask_weapon_buy3 == "Armures":
+            list_armor()
         else:
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
@@ -266,7 +323,6 @@ def fight_blob(blob_niv1, healt):
                 ecrire_info()
                 save()
                 exit(0)
-                
     
 def fight_sorcier(sorcier_niv1, healt):
     global levels_check
@@ -327,15 +383,30 @@ def fight_sorcier(sorcier_niv1, healt):
                 sleep(1)
                 if resistance >= 1:
                     healt -= 10 / resistance
+                    if armor_fer_buy == True:
+                        healt += 1
+                    if armor_or_buy == True:
+                        healt += 2
+                    if armor_diamant_buy == True:
+                        healt += 3                          
                 else:
-                    healt -= 10
+                    if armor_fer_buy == True:
+                        healt -= 10 / 0.5
+                    if armor_or_buy == True:
+                        healt -= 10 / 1
+                    if armor_diamant_buy == True:
+                        healt -= 10 / 2
+                    else:
+                        healt -= 5
                 print("Vos Pv: ",healt)
         else:
             pass   
         
-        ask_weapon_buy3 = input("Voulez vous voir le magasin ? (Oui/Non)\n> ")
-        if ask_weapon_buy3 == "magasin":
+        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Enter = Exit)\n> ")
+        if ask_weapon_buy3 == "Armes":
             list_weapon()
+        if ask_weapon_buy3 == "Armures":
+            list_armor()
         else:
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
@@ -359,7 +430,7 @@ def fight_sorcier(sorcier_niv1, healt):
                 exit(0)
 walk()
 
-ask_weapon_png = input("Vous avez vu un vendeur d'arme vous voulez le voir ? (Oui/Non)\n> ")
+ask_weapon_png = input("Vous avez vu un vendeur d'arme vous voulez le voir ? (Oui/Non/Enter)\n> ")
 if ask_weapon_png == "Oui":
     walk()
     ask_weapon = input("Vous voulez achetez une arme vous avez {}$ ? (Oui/Non)\n>".format(wallet))
@@ -369,6 +440,14 @@ if ask_weapon_png == "Oui":
         print("Vous devez avoir une arme pour avancer")
         list_weapon()
 else:
+    pass
+
+ask_armor_png = input("Vous avez vu un vendeur d'armure vous voulez le voir ? (Oui/Non)\n> ")
+if ask_armor_png == "Oui":
+    walk()
+    ask_armor = input("Vous voulez achetez une armure vous avez {}$ ? (Oui/Non)\n>".format(wallet))
+    if ask_armor == "Oui":
+        list_armor()
     pass
     ### ASK WEAPON START
 
