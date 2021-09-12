@@ -76,7 +76,7 @@ def ecrire_info():
     global sword_buy
     global pistole_buy
     with open(nom_fichier ,'w') as fichier:
-        json.dump(str({'name:': player, 'force:': force, 'resistance:': resistance, 'Pv:': healt, 'Money:': wallet, 'Couteau:': couteau, 'Epee:': sword, 'Pistolet': pistole, 'Xp:': xp, 'Levels:': levels, 'Levels_Check:': levels_check, 'Couteau_Buy': couteau_buy, 'Sword_Buy:': sword_buy, 'Gun_Buy:': pistole_buy}), fichier)
+        json.dump(str({'name:': player, 'force:': force, 'resistance:': resistance, 'Pv:': healt, 'Money:': wallet, 'Couteau:': couteau, 'Epee:': sword, 'Pistolet': pistole, 'Xp:': xp, 'Levels:': levels, 'Levels_Check:': levels_check, 'Couteau_Buy': couteau_buy, 'Sword_Buy:': sword_buy, 'Gun_Buy:': pistole_buy, 'Armor_Fer_Buy': armor_fer_buy, 'Armor_Or_Buy': armor_or_buy, 'Armor_Diamond_Buy': armor_diamant_buy}), fichier)
 
 ### START
 print("Bienvenue",player," Vous avez ",wallet,"$ Votre nombre de vie ",healt,"pv")
