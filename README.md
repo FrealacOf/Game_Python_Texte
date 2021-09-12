@@ -1,10 +1,8 @@
-# GAME FREALAC PYTHON 0.0.0.4
-Updates 0.0.0.4:
+# GAME FREALAC PYTHON 0.0.1.0
+Updates 0.0.1.0:
 ```
-+ XP LEVELS
-+ Force Levels
-+ Resistance Levels
-+ New Mobs (Sorcier)
++ Design
++ Armures Rajoutées 
 + Fix Bug
 ```
 
@@ -38,10 +36,4 @@ Updates 0.0.0.4:
 + The destructor (Degats : 50/Prix:5000)
 + The Ice of King (Degats : 100/Prix: 12 000)
 + The Neants (Degats: 200/Prix: 40 000 + Vous tuez le boss Oynix)
-```
-# Armures
-```
-+ Armure en fer (500 pieces/Degats divisez par 0.5) (Fait)
-+ Armure en Or (1000 pieces/Degats divisez par 1) (Fait)
-+ Armure en Diamant (2000 pieces/Degats divisez par 2) (Fait)
 ```
