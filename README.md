@@ -3,6 +3,7 @@ Updates 0.0.1.0:
 ```
 + Design
 + Armures Rajoutées 
++ Quêtes Tuez 10 blobs / Tuez 20 sorciers
 + Fix Bug
 ```
 
@@ -18,9 +19,6 @@ Updates 0.0.1.0:
 # FUTURS UPDATES
 # SHOP
 ```
-+ Marchand de quêtes:
-  + Tuez 10 blobs (50 pieces)
-  + Tuez 20 sorciers (500 pieces)
   - Quêtes à 2 PARTIES:
     - Force Niveaux 10 (1/2) / Resistance Niveaux 10 (2/2)[RECOMPENSE : New Boss (Oynix); Nouveaux marchand d'armes]
 ```
