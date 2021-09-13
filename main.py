@@ -76,6 +76,181 @@ the_ice_of_king_prix = 12000 # Degats : 100
 
 fight_blob_niv1 = False
 
+# BOSS DONNE
+oynix_life = 20000 # Degats : 100
+
+
+### BOSS
+
+def oynix_start():
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("""
+         _______               _____                    _____                    _____                                  
+        /::\    \             |\    \                  /\    \                  /\    \                 ______          
+       /::::\    \            |:\____\                /::\____\                /::\    \               |::|   |         
+      /::::::\    \           |::|   |               /::::|   |                \:::\    \              |::|   |         
+     /::::::::\    \          |::|   |              /:::::|   |                 \:::\    \             |::|   |         
+    /:::/~~\:::\    \         |::|   |             /::::::|   |                  \:::\    \            |::|   |         
+   /:::/    \:::\    \        |::|   |            /:::/|::|   |                   \:::\    \           |::|   |         
+  /:::/    / \:::\    \       |::|   |           /:::/ |::|   |                   /::::\    \          |::|   |         
+ /:::/____/   \:::\____\      |::|___|______    /:::/  |::|   | _____    ____    /::::::\    \         |::|   |         
+|:::|    |     |:::|    |     /::::::::\    \  /:::/   |::|   |/\    \  /\   \  /:::/\:::\    \  ______|::|___|___ ____ 
+|:::|____|     |:::|    |    /::::::::::\____\/:: /    |::|   /::\____\/::\   \/:::/  \:::\____\|:::::::::::::::::|    |
+ \:::\    \   /:::/    /    /:::/~~~~/~~      \::/    /|::|  /:::/    /\:::\  /:::/    \::/    /|:::::::::::::::::|____|
+  \:::\    \ /:::/    /    /:::/    /          \/____/ |::| /:::/    /  \:::\/:::/    / \/____/  ~~~~~~|::|~~~|~~~      
+   \:::\    /:::/    /    /:::/    /                   |::|/:::/    /    \::::::/    /                 |::|   |         
+    \:::\__/:::/    /    /:::/    /                    |::::::/    /      \::::/____/                  |::|   |         
+     \::::::::/    /     \::/    /                     |:::::/    /        \:::\    \                  |::|   |         
+      \::::::/    /       \/____/                      |::::/    /          \:::\    \                 |::|   |         
+       \::::/    /                                     /:::/    /            \:::\    \                |::|   |         
+        \::/____/                                     /:::/    /              \:::\____\               |::|   |         
+         ~~                                           \::/    /                \::/    /               |::|___|         
+                                                       \/____/                  \/____/                 ~~              
+                                                                                                                        
+
+
+    """)
+    ask_boss_attack = input("                        Vous voulez vous l'attacker?\n                                 Oui/Non\n                                  > ")
+    if ask_boss_attack == "Oui":
+        oynix_fight()
+    else:
+        pass
+
+def oynix_fight():
+    global healt
+    global oynix_life
+    global levels_check
+    global force
+    global resistance
+    global levels
+    global xp
+    global the_destructor
+    global the_ice_of_king
+    global player
+    global wallet
+    global couteau_buy
+    global sword_buy
+    global pistole_buy
+    while True:
+        ask_attack_oynix = input("Voulez vous l'attaquer ? (Oui/Non)\nSTATS\nPv : 20 000\nDegat : 100\n> ")
+        if ask_attack_oynix == "Oui":
+            while True:
+                if xp >= levels_check:
+                    xp_level_up()
+                else:
+                    pass
+                quest_checks()
+                if oynix_life == 0:
+                    print("Bien jouer {}".format(player))
+                    sleep(0.5)
+                    print("Je reviendrais mes plus FORT !")
+                    sleep(0.2)
+                    print("____________________________________________")
+                    print(oynix_life)
+                    print('Vous avez gagnez !')
+                    force += 6
+                    resistance += 6
+                    wallet += 15000
+                    healt = 20
+                    print("Vous gagnez 15000$ + ",xp,"XP, TOTAL : ",wallet,"$ XP : ",xp)
+                    oynix_life = 20000
+                    print("____________________________________________")
+                    break
+                if healt == 0:
+                    print("____________________________________________")
+                    print("Vos Pv : ",healt)
+                    print("Vous avez perdu !")
+                    sleep(2)
+                    print("____________________________________________")
+                    break
+                if couteau_buy == False:
+                    print("Vous n'avez pas d'arme !")
+                    list_weapon(wallet, couteau_buy, sword_buy, pistole_buy)
+                    break
+                print("Blob Niv : 1\nPv : 10")
+                print("Vous attacker !")
+                sleep(1)
+                if force >= 1:
+                    if couteau_buy == True:
+                        oynix_life -= 5 * force
+                    if sword_buy == True:
+                        oynix_life -= 10 * force
+                    if pistole_buy == True:
+                        oynix_life -= 15 * force
+                    if the_destructor == True:
+                        oynix_life -= 50 * force
+                    if the_ice_of_king == True:
+                        oynix_life -= 100 * force
+                else:
+                    if couteau_buy == True:
+                        oynix_life -= 5
+                    if sword_buy == True:
+                        oynix_life -= 10
+                    if pistole_buy == True:
+                        oynix_life -= 15
+                    if the_destructor == True:
+                        oynix_life -= 50
+                    if the_ice_of_king == True:
+                        oynix_life -= 100
+                print("Pv Blob: ",oynix_life) 
+                print("Il vous attack !")
+                sleep(1)
+                if resistance >= 1:
+                    healt -= 100 / resistance
+                    if armor_fer_buy == True:
+                        healt += 1
+                    if armor_or_buy == True:
+                        healt += 2
+                    if armor_diamant_buy == True:
+                        healt += 3                          
+                else:
+                    if armor_fer_buy == True:
+                        healt -= 100 / 0.5
+                    if armor_or_buy == True:
+                        healt -= 100 / 1
+                    if armor_diamant_buy == True:
+                        healt -= 100 / 2
+                    else:
+                        healt -= 5
+                print("Vos Pv: ",healt)
+        else:
+            pass
+              
+        ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Quetes/Enter = Exit)\n> ")
+        if ask_weapon_buy3 == "Armes":
+            list_weapon()
+        if ask_weapon_buy3 == "Armures":
+            list_armor()
+        if ask_weapon_buy3 == "Quetes":
+            shop_quest()
+
+        if weapon_png_2 == True:
+            ask_new_png_weapon = input("Voulez voir le marchand supreme ? (Oui/Non)\n> ")
+            if ask_new_png_weapon == "Oui":
+                marchand_weapon2()
+            if ask_new_png_weapon == "Non":
+                pass
+        else:
+            ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
+            if ask_walk_distance == "Oui":
+                walk2()
+                if random.randint(0, 1) == 0:
+                    print("____________________________________________")
+                    print("Vous avez trouvez un BLOB")
+                    sleep(1)
+                    print("____________________________________________")
+                    fight_blob()
+                else:
+                    print("____________________________________________")
+                    print("Vous avez trouver un SORCIER")
+                    sleep(1)
+                    print("____________________________________________")
+                    fight_sorcier()
+            if ask_walk_distance == "Exit":
+                print("Sauvegarde ! (Veilliez ne pas fermer)")
+                ecrire_info()
+                save()
+                exit(0)
 ### JSON
 def ecrire_info():
     global player
@@ -282,6 +457,7 @@ def save():
 def xp_level_up():
     global levels_check
     global xp
+    global healt
     global levels
     global resistance
     global force
@@ -291,7 +467,7 @@ def xp_level_up():
         levels += 1 
         ecrire_info()
         print("Bravo vous etes niveau {}".format(levels))
-        ask_speciality_updates = input("Que voulez vous améliorer ? (force/resistance)\n> ")
+        ask_speciality_updates = input("Que voulez vous améliorer ? (force/resistance/healt)\n> ")
         if ask_speciality_updates == "force":
             print("____________________________________________")
             force += 1
@@ -306,6 +482,17 @@ def xp_level_up():
             print("Resistance > ",resistance, "\nXp Next Level > ",levels_check)
             ecrire_info()
             print("____________________________________________")
+        if ask_speciality_updates == "healt":
+            if weapon_png_2 == True:
+                print("____________________________________________")
+                healt * 2
+                print("Vous avez gagnez 1 niveau de HEALT")
+                print("Resistance > ",healt, "\nXp Next Level > ",levels_check)
+                ecrire_info()
+                print("____________________________________________")
+            if weapon_png_2 == False:
+                print("Vous n'avez pas fait la quête à deux parties !")
+                pass
         
 
 def quest_checks():
@@ -459,6 +646,14 @@ def fight_blob():
             if ask_new_png_weapon == "Non":
                 pass
         else:
+            if oynix_boss == True:
+                ask_boss_attack = input("Vous voulez vous attacker le boss OYNIX ? (Oui/Non)\n> ")
+                if ask_attack_blob == "Oui":
+                    oynix_fight()
+                if ask_attack_blob == "Non":
+                    pass
+                else:
+                    pass
             ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
             if ask_walk_distance == "Oui":
                 walk2()
