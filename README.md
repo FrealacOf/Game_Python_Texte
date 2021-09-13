@@ -1,4 +1,11 @@
-# GAME FREALAC PYTHON 0.0.2.0
+# GAME FREALAC PYTHON 0.0.3.0
+Updates 0.0.3.0
+```
++ Nouveaux Pourvoir (HEALT) Multiplie la vie * 2
++ Oynix (PV:20 000/Degats: 100) [RECOMPENSE : Marchand secret; Quetes Secrets; 
+                                                       Débloque une épee; 15 000 pieces]
+```
+
 Updates 0.0.2.0:
 ```
 + Design
@@ -24,8 +31,6 @@ Updates 0.0.2.0:
 # FUTURS UPDATES
 # Boss
 ```
-+ Oynix (PV:20 000/Degats: 100) Taux d'apparition 0.01 [RECOMPENSE : Marchand secret; Quetes Secrets; 
-                                                       Débloque une épee; 10 000 pieces]
 + The End (PV:40 000/Degats: 200) [Pour debloquez le boss vous devez tuez Oynix + 
                                   Ils coutents 400 000 pieces au pres du marchand secret]
 ```
