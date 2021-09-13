@@ -1,9 +1,11 @@
-# GAME FREALAC PYTHON 0.0.1.5
-Updates 0.0.1.5:
+# GAME FREALAC PYTHON 0.0.2.0
+Updates 0.0.2.0:
 ```
 + Design
 + Armures Rajoutées 
 + Quêtes Tuez 10 blobs / Tuez 20 sorciers
++ Quêtes à 2 PARTIES:
+  Force Niveaux 10 (1/2) / Resistance Niveaux 10 (2/2)[RECOMPENSE : New Boss (Oynix); Nouveaux marchand d'armes]
 + New Weapons:
   The Destructor (Prices: 5000/Degats: 50)
   The Ice Of King (Prices: 12 000/Degats: 100)
@@ -20,11 +22,6 @@ Updates 0.0.1.5:
 
 
 # FUTURS UPDATES
-# SHOP
-```
-  - Quêtes à 2 PARTIES:
-    - Force Niveaux 10 (1/2) / Resistance Niveaux 10 (2/2)[RECOMPENSE : New Boss (Oynix); Nouveaux marchand d'armes]
-```
 # Boss
 ```
 + Oynix (PV:20 000/Degats: 100) Taux d'apparition 0.01 [RECOMPENSE : Marchand secret; Quetes Secrets; 
