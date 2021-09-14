@@ -1,4 +1,9 @@
-# GAME FREALAC PYTHON 0.0.3.0
+# GAME FREALAC PYTHON 0.0.3.2
+Updates 0.0.3.2
+```
++ The Neants (Degats: 200/Prix: 40 000 + Vous tuez le boss Oynix)
+```
+
 Updates 0.0.3.0
 ```
 + Nouveaux Pourvoir (HEALT) Multiplie la vie * 2
@@ -34,7 +39,4 @@ Updates 0.0.2.0:
 + The End (PV:40 000/Degats: 200) [Pour debloquez le boss vous devez tuez Oynix + 
                                   Ils coutents 400 000 pieces au pres du marchand secret]
 ```
-# Armes
-```
-+ The Neants (Degats: 200/Prix: 40 000 + Vous tuez le boss Oynix)
-```
+
