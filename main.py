@@ -26,6 +26,7 @@ player = input("Qu'elle est votre pseudo ?\n> ")
 # marchand quete
 weapon_png_2 = False
 oynix_boss = False
+the_end_boss_activated = False
 
 oynix_win = False
 ### QUETES
@@ -81,10 +82,97 @@ fight_blob_niv1 = False
 
 # BOSS DONNE
 oynix_life = 20000 # Degats : 100
+the_end_boss_life = 40000 # Degats : 200 Condition : [tuez Oynix + 400 000 pieces au marchand ]
+                                  
 
-
+def ecrire_info():
+    global player
+    global force
+    global resistance
+    global healt
+    global wallet
+    global couteau
+    global sword
+    global pistole
+    global xp
+    global levels
+    global levels_check
+    global couteau_buy
+    global sword_buy
+    global pistole_buy
+    with open(nom_fichier ,'w') as fichier:
+        json.dump(str({'name:': player, 'force:': force, 'resistance:': resistance, 'Pv:': healt, 'Money:': wallet, 'Couteau:': couteau, 'Epee:': sword, 'Pistolet': pistole, 'Xp:': xp, 'Levels:': levels, 'Levels_Check:': levels_check, 'Couteau_Buy': couteau_buy, 'Sword_Buy:': sword_buy, 'Gun_Buy:': pistole_buy, 'Armor_Fer_Buy': armor_fer_buy, 'Armor_Or_Buy': armor_or_buy, 'Armor_Diamond_Buy': armor_diamant_buy}), fichier)
 ### BOSS
+def end_the_end():
+    print(""" 
+                                                                          
+      _____        _____          ____    ____      ____         _____    
+ ___|\     \   ___|\    \    ____|\   \  |    |    |    |   ____|\    \   
+|    |\     \ |    |\    \  /    /\    \ |    |    |    |  /     /\    \  
+|    | |     ||    | |    ||    |  |    ||    |    |    | /     /  \    \ 
+|    | /_ _ / |    |/____/ |    |__|    ||    |    |    ||     |    |    |
+|    |\    \  |    |\    \ |    .--.    ||    |    |    ||     |    |    |
+|    | |    | |    | |    ||    |  |    ||\    \  /    /||\     \  /    /|
+|____|/____/| |____| |____||____|  |____|| \ ___\/___ / || \_____\/____/ |
+|    /     || |    | |    ||    |  |    | \ |   ||   | /  \ |    ||    | /
+|____|_____|/ |____| |____||____|  |____|  \|___||___|/    \|____||____|/ 
+  \(    )/      \(     )/    \(      )/      \(    )/         \(    )/    
+   '    '        '     '      '      '        '    '           '    '     
+                                                                          
+""")
+    sleep(0.5)
+    print("                Vous avez battue le boss FINAL")
+    sleep(1.5)
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("                Mais cela ne que le début d'une grande aventure")
+    sleep(2)
+    print(""" 
+ ▄▄▄▄    ▒█████   ███▄    █  ███▄    █ ▓█████     ▄████▄   ██░ ██  ▄▄▄       ███▄    █  ▄████▄  ▓█████ 
+▓█████▄ ▒██▒  ██▒ ██ ▀█   █  ██ ▀█   █ ▓█   ▀    ▒██▀ ▀█  ▓██░ ██▒▒████▄     ██ ▀█   █ ▒██▀ ▀█  ▓█   ▀ 
+▒██▒ ▄██▒██░  ██▒▓██  ▀█ ██▒▓██  ▀█ ██▒▒███      ▒▓█    ▄ ▒██▀▀██░▒██  ▀█▄  ▓██  ▀█ ██▒▒▓█    ▄ ▒███   
+▒██░█▀  ▒██   ██░▓██▒  ▐▌██▒▓██▒  ▐▌██▒▒▓█  ▄    ▒▓▓▄ ▄██▒░▓█ ░██ ░██▄▄▄▄██ ▓██▒  ▐▌██▒▒▓▓▄ ▄██▒▒▓█  ▄ 
+░▓█  ▀█▓░ ████▓▒░▒██░   ▓██░▒██░   ▓██░░▒████▒   ▒ ▓███▀ ░░▓█▒░██▓ ▓█   ▓██▒▒██░   ▓██░▒ ▓███▀ ░░▒████▒
+░▒▓███▀▒░ ▒░▒░▒░ ░ ▒░   ▒ ▒ ░ ▒░   ▒ ▒ ░░ ▒░ ░   ░ ░▒ ▒  ░ ▒ ░░▒░▒ ▒▒   ▓▒█░░ ▒░   ▒ ▒ ░ ░▒ ▒  ░░░ ▒░ ░
+▒░▒   ░   ░ ▒ ▒░ ░ ░░   ░ ▒░░ ░░   ░ ▒░ ░ ░  ░     ░  ▒    ▒ ░▒░ ░  ▒   ▒▒ ░░ ░░   ░ ▒░  ░  ▒    ░ ░  ░
+ ░    ░ ░ ░ ░ ▒     ░   ░ ░    ░   ░ ░    ░      ░         ░  ░░ ░  ░   ▒      ░   ░ ░ ░           ░   
+ ░          ░ ░           ░          ░    ░  ░   ░ ░       ░  ░  ░      ░  ░         ░ ░ ░         ░  ░
+      ░                                          ░                                     ░                 
+""")
+    ask_weapon_buy3 = input("Voulez vous voir qu'elle magasin  ? (Armes/Armures/Quetes/Enter = Exit)\n> ")
+    if ask_weapon_buy3 == "Armes":
+        list_weapon()
+    if ask_weapon_buy3 == "Armures":
+        list_armor()
+    if ask_weapon_buy3 == "Quetes":
+        shop_quest()
 
+    if weapon_png_2 == True:
+        ask_new_png_weapon = input("Voulez voir le marchand supreme ? (Oui/Non)\n> ")
+        if ask_new_png_weapon == "Oui":
+            marchand_weapon2()
+        if ask_new_png_weapon == "Non":
+            pass
+    else:
+        ask_walk_distance = input("Au loin vous voyez un monstre, voulez vous l'attaquer ? (Oui/Exit)\n> ")
+        if ask_walk_distance == "Oui":
+            walk2()
+            if random.randint(0, 1) == 0:
+                print("____________________________________________")
+                print("Vous avez trouvez un BLOB")
+                sleep(1)
+                print("____________________________________________")
+                fight_blob()
+            else:
+                print("____________________________________________")
+                print("Vous avez trouver un SORCIER")
+                sleep(1)
+                print("____________________________________________")
+                fight_sorcier()
+        if ask_walk_distance == "Exit":
+            print("Sauvegarde ! (Veilliez ne pas fermer)")
+            ecrire_info()
+            save()
+            exit(0)
 def oynix_start():
     print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
     print("""
@@ -119,6 +207,30 @@ def oynix_start():
     else:
         pass
 
+def theendstart():
+    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    print("""
+                                                                                         
+ _________________  ____   ____      ______        ______  _____   ______        _____   
+/                 \|    | |    | ___|\     \   ___|\     \|\    \ |\     \   ___|\    \  
+\______     ______/|    | |    ||     \     \ |     \     \\\    \| \     \ |    |\    \ 
+   \( /    /  )/   |    |_|    ||     ,_____/||     ,_____/|\|    \  \     ||    | |    |
+    ' |   |   '    |    .-.    ||     \--'\_|/|     \--'\_|/ |     \  |    ||    | |    |
+      |   |        |    | |    ||     /___/|  |     /___/|   |      \ |    ||    | |    |
+     /   //        |    | |    ||     \____|\ |     \____|\  |    |\ \|    ||    | |    |
+    /___//         |____| |____||____ '     /||____ '     /| |____||\_____/||____|/____/|
+   |`   |          |    | |    ||    /_____/ ||    /_____/ | |    |/ \|   |||    /    | |
+   |____|          |____| |____||____|     | /|____|     | / |____|   |___|/|____|____|/ 
+     \(              \(     )/    \( |_____|/   \( |_____|/    \(       )/    \(    )/   
+      '               '     '      '    )/       '    )/        '       '      '    '    
+                                        '             '                                      
+    """)
+    ask_boss_attack_end = input("                        Vous voulez vous l'attacker?\n                                 Oui/Non\n                                  > ")
+    if ask_boss_attack_end == "Oui":
+        the_end_fight()
+    else:
+        pass
+
 def oynix_fight():
     global healt
     global oynix_life
@@ -131,6 +243,7 @@ def oynix_fight():
     global xp
     global the_destructor
     global the_ice_of_king
+    global the_end_boss_activated
     global player
     global wallet
     global couteau_buy
@@ -155,6 +268,7 @@ def oynix_fight():
                     print('Vous avez gagnez !')
                     force += 6
                     resistance += 6
+                    the_end_boss_activated = True
                     wallet += 15000
                     oynix_win = True
                     healt = 20
@@ -168,10 +282,6 @@ def oynix_fight():
                     print("Vous avez perdu !")
                     sleep(2)
                     print("____________________________________________")
-                    break
-                if couteau_buy == False:
-                    print("Vous n'avez pas d'arme !")
-                    list_weapon(wallet, couteau_buy, sword_buy, pistole_buy)
                     break
                 print("Blob Niv : 1\nPv : 10")
                 print("Vous attacker !")
@@ -261,24 +371,113 @@ def oynix_fight():
                 ecrire_info()
                 save()
                 exit(0)
-### JSON
-def ecrire_info():
-    global player
+### 
+def the_end_fight():
+    global healt
+    global the_end_boss_life
+    global the_end_boss_activated
+    global levels_check
+    global the_neant
     global force
     global resistance
-    global healt
-    global wallet
-    global couteau
-    global sword
-    global pistole
-    global xp
     global levels
-    global levels_check
+    global xp
+    global the_destructor
+    global the_ice_of_king
+    global player
+    global wallet
     global couteau_buy
     global sword_buy
     global pistole_buy
-    with open(nom_fichier ,'w') as fichier:
-        json.dump(str({'name:': player, 'force:': force, 'resistance:': resistance, 'Pv:': healt, 'Money:': wallet, 'Couteau:': couteau, 'Epee:': sword, 'Pistolet': pistole, 'Xp:': xp, 'Levels:': levels, 'Levels_Check:': levels_check, 'Couteau_Buy': couteau_buy, 'Sword_Buy:': sword_buy, 'Gun_Buy:': pistole_buy, 'Armor_Fer_Buy': armor_fer_buy, 'Armor_Or_Buy': armor_or_buy, 'Armor_Diamond_Buy': armor_diamant_buy}), fichier)
+    while True:
+        ask_attack_end = input("Voulez vous l'attaquer ? (Oui/Non)\nSTATS\nPv : 40 000\nDegat : 200\n> ")
+        if ask_attack_end == "Oui":
+            while True:
+                if xp >= levels_check:
+                    xp_level_up()
+                else:
+                    pass
+                quest_checks()
+                if the_end_boss_life == 0:
+                    print("Bien jouer {}".format(player))
+                    sleep(0.5)
+                    print("Tu crois que cela est finis Alors que cela n'es faux")
+                    sleep(0.2)
+                    print("____________________________________________")
+                    print(oynix_life)
+                    print('Vous avez gagnez !')
+                    force += 20
+                    resistance += 20
+                    wallet += 65000
+                    oynix_win = True
+                    healt = 20
+                    print("Vous gagnez 65000$ + ",xp,"XP, TOTAL : ",wallet,"$ XP : ",xp)
+                    oynix_life = 20000
+                    print("____________________________________________")
+                    break
+                if healt == 0:
+                    print("____________________________________________")
+                    print("Vos Pv : ",healt)
+                    print("Vous avez perdu !")
+                    sleep(2)
+                    print("____________________________________________")
+                    break
+                print("Blob Niv : 1\nPv : 10")
+                print("Vous attacker !")
+                sleep(1)
+                if force >= 1:
+                    if couteau_buy == True:
+                        the_end_boss_life -= 5 * force
+                    if sword_buy == True:
+                        the_end_boss_life -= 10 * force
+                    if pistole_buy == True:
+                        the_end_boss_life -= 15 * force
+                    if the_destructor == True:
+                        the_end_boss_life -= 50 * force
+                    if the_ice_of_king == True:
+                        the_end_boss_life -= 100 * force
+                    if the_neant == True:
+                        the_end_boss_life -= 200 * force
+                else:
+                    if couteau_buy == True:
+                        the_end_boss_life -= 5
+                    if sword_buy == True:
+                        the_end_boss_life -= 10
+                    if pistole_buy == True:
+                        the_end_boss_life -= 15
+                    if the_destructor == True:
+                        the_end_boss_life -= 50
+                    if the_ice_of_king == True:
+                        the_end_boss_life -= 100
+                    if the_neant == True:
+                        the_end_boss_life -= 200
+                print("Pv The End: ",the_end_boss_life) 
+                print("Il vous attack !")
+                sleep(1)
+                if resistance >= 1:
+                    healt -= 100 / resistance
+                    if armor_fer_buy == True:
+                        healt += 1
+                    if armor_or_buy == True:
+                        healt += 2
+                    if armor_diamant_buy == True:
+                        healt += 3                          
+                else:
+                    if armor_fer_buy == True:
+                        healt -= 100 / 0.5
+                    if armor_or_buy == True:
+                        healt -= 100 / 1
+                    if armor_diamant_buy == True:
+                        healt -= 100 / 2
+                    else:
+                        healt -= 5
+                print("Vos Pv: ",healt)
+        else:
+            pass
+        end_the_end()      
+
+
+
 
 ### START
 print("Bienvenue",player," Vous avez ",wallet,"$ Votre nombre de vie ",healt,"pv")
@@ -289,6 +488,7 @@ def marchand_weapon2():
     global wallet
     global the_destructor_prix
     global the_destructor
+    global the_end_boss_activated
     global the_ice_of_king_prix
     global couteau_buy
     global sword_buy
@@ -298,38 +498,63 @@ def marchand_weapon2():
     global oynix_win
     global the_ice_of_king
     print("____________________________________________")
-    ask_weapon2 = input("Vous voulez qu'elle arme ?\n1: The Destructor (Degats: 50/Prix: 5000)\n2: The Ice of King (Degats: 100/Prix: 12 000)\n3: The Neant (Degats:200/Prix4)0 000:\n1 ou 2 ou 3 Exit\n> ")
+    ask_weapon2 = input("Vous voulez qu'elle arme ?\n1: The Destructor (Degats: 50/Prix: 5000)\n2: The Ice of King (Degats: 100/Prix: 12 000)\n3: The Neant (Degats:200/Prix:40 000\n4:Lists boss\n1 ou 2 ou 3 ou 4Exit\n> ")
     if ask_weapon2 == "1":
-        couteau_buy=False
-        sword_buy=False
-        pistole_buy=False
-        wallet -= the_destructor_prix
-        the_destructor=True
-        print("Il vous reste, {}$".format(wallet))
-        print("____________________________________________")
+        if wallet < 5000:
+            print("Vous n'avez pas 50 $, votre argent {}$".format(wallet))
+        if wallet >= 5000:
+            couteau_buy=False
+            sword_buy=False
+            pistole_buy=False
+            wallet -= the_destructor_prix
+            the_destructor=True
+            print("Il vous reste, {}$".format(wallet))
+            print("____________________________________________")
     if ask_weapon2 == "2":
-        couteau_buy=False
-        sword_buy=False
-        pistole_buy=False
-        the_destructor=False
-        wallet -= the_ice_of_king_prix
-        the_ice_of_king=True
-        print("Il vous reste, {}$".format(wallet))
-        print("____________________________________________")
-    if ask_weapon2 == "3":
-        if oynix_win == True:
+        if wallet < 12000:
+            print("Vous n'avez pas 50 $, votre argent {}$".format(wallet))
+        if wallet >= 12000:
             couteau_buy=False
             sword_buy=False
             pistole_buy=False
             the_destructor=False
-            wallet -= the_neant_prix
-            the_ice_of_king=False
-            the_neant = True
+            wallet -= the_ice_of_king_prix
+            the_ice_of_king=True
             print("Il vous reste, {}$".format(wallet))
             print("____________________________________________")
+    if ask_weapon2 == "3":
+        if wallet < 40000:
+            print("Vous n'avez pas 50 $, votre argent {}$".format(wallet))
+        if wallet >= 40000:
+            if oynix_win == True:
+                couteau_buy=False
+                sword_buy=False
+                pistole_buy=False
+                the_destructor=False
+                wallet -= the_neant_prix
+                the_ice_of_king=False
+                the_neant = True
+                print("Il vous reste, {}$".format(wallet))
+                print("____________________________________________")
         else:
             print("Vous n'avez pas vaincu le boss OYNIX")
             marchand_weapon2()
+    if ask_weapon2 == "4":
+        ask_boss_buy = input("Vous voulez qu'elle boss \nOynix \ Vie : 20 000 \ Degats : 100\nThe End \ Vie : 40 000 \ Degats: 200 \ Prix : 400 000$\nOynix or TheEnd ?\n> ")
+        if ask_boss_buy == "Oynix":
+            print("Bonne chance !")
+            sleep(0.2)
+            oynix_fight()
+        if ask_boss_buy == "TheEnd":
+            if the_end_boss_activated == True:
+                if wallet < 400000:
+                    print("Vous n'avez pas assez d'argent il vous faut 400 000$\nVous avez {}".format(wallet))
+                if wallet >= 400000:
+                    print("Bon Combat !")
+                    sleep(0.2)
+                    theendstart()
+            else:
+                print("Vous n'avez pas debloquez le boss\nVeilliez tuez le Oynix en premier")
     if ask_weapon2 == "Exit":
         pass
     
@@ -606,10 +831,6 @@ def fight_blob():
                     sleep(2)
                     print("____________________________________________")
                     break
-                if couteau_buy == False:
-                    print("Vous n'avez pas d'arme !")
-                    list_weapon(wallet, couteau_buy, sword_buy, pistole_buy)
-                    break
                 print("Blob Niv : 1\nPv : 10")
                 print("Vous attacker !")
                 sleep(1)
@@ -748,10 +969,6 @@ def fight_sorcier():
                     print("Vous avez perdu !")
                     sleep(2)
                     print("____________________________________________")
-                    break
-                if couteau_buy == False:
-                    print("Vous n'avez pas d'arme !")
-                    list_weapon(wallet, couteau_buy, sword_buy, pistole_buy)
                     break
                 print("Sorcier Niv : 1\nPv : 10")
                 print("Vous attacker !")
