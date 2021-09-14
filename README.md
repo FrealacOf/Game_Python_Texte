@@ -3,6 +3,7 @@ Updates 0.0.4.0
 ```
 + The End (PV:40 000/Degats: 200) [Pour debloquez le boss vous devez tuez Oynix + 
                                   Ils coutents 400 000 pieces au pres du marchand secret]
++ Bug Fixe
 ```
 Updates 0.0.3.2
 ```
@@ -39,5 +40,8 @@ Updates 0.0.2.0:
 
 
 # FUTURS UPDATES
-
+# SOUNDS
+```
++ Ajoutez des bruitages
+```
 
