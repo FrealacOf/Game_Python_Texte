@@ -1,4 +1,9 @@
-# GAME FREALAC PYTHON 0.0.3.2
+# GAME FREALAC PYTHON 0.0.4.0
+Updates 0.0.4.0
+```
++ The End (PV:40 000/Degats: 200) [Pour debloquez le boss vous devez tuez Oynix + 
+                                  Ils coutents 400 000 pieces au pres du marchand secret]
+```
 Updates 0.0.3.2
 ```
 + The Neants (Degats: 200/Prix: 40 000 + Vous tuez le boss Oynix)
@@ -29,14 +34,10 @@ Updates 0.0.2.0:
 ## Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Menu or [py](https://www.python.org/downloads/).
 
 > 1: pip install tqdm
-> 2: Open start.bat
+> 2: Open start.bat20
 
 
 
 # FUTURS UPDATES
-# Boss
-```
-+ The End (PV:40 000/Degats: 200) [Pour debloquez le boss vous devez tuez Oynix + 
-                                  Ils coutents 400 000 pieces au pres du marchand secret]
-```
+
 
