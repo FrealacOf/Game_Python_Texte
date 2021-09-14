@@ -27,6 +27,7 @@ player = input("Qu'elle est votre pseudo ?\n> ")
 weapon_png_2 = False
 oynix_boss = False
 
+oynix_win = False
 ### QUETES
 x_blob_kill = 0 #10 blobs / 50 pieces
 x_blob_kill_running = False
@@ -70,9 +71,11 @@ pistole_buy = False
 
 the_destructor = False
 the_ice_of_king = False
+the_neant = False
 
 the_destructor_prix = 5000 # Degats : 50
 the_ice_of_king_prix = 12000 # Degats : 100
+the_neant_prix = 40000 # Degats : 200
 
 fight_blob_niv1 = False
 
@@ -119,7 +122,9 @@ def oynix_start():
 def oynix_fight():
     global healt
     global oynix_life
+    global oynix_win
     global levels_check
+    global the_neant
     global force
     global resistance
     global levels
@@ -151,6 +156,7 @@ def oynix_fight():
                     force += 6
                     resistance += 6
                     wallet += 15000
+                    oynix_win = True
                     healt = 20
                     print("Vous gagnez 15000$ + ",xp,"XP, TOTAL : ",wallet,"$ XP : ",xp)
                     oynix_life = 20000
@@ -181,6 +187,8 @@ def oynix_fight():
                         oynix_life -= 50 * force
                     if the_ice_of_king == True:
                         oynix_life -= 100 * force
+                    if the_neant == True:
+                        oynix_life -= 200 * force
                 else:
                     if couteau_buy == True:
                         oynix_life -= 5
@@ -192,6 +200,8 @@ def oynix_fight():
                         oynix_life -= 50
                     if the_ice_of_king == True:
                         oynix_life -= 100
+                    if the_neant == True:
+                        oynix_life -= 200
                 print("Pv Blob: ",oynix_life) 
                 print("Il vous attack !")
                 sleep(1)
@@ -283,9 +293,12 @@ def marchand_weapon2():
     global couteau_buy
     global sword_buy
     global pistole_buy
+    global the_neant
+    global the_neant_prix
+    global oynix_win
     global the_ice_of_king
     print("____________________________________________")
-    ask_weapon2 = input("Vous voulez qu'elle arme ?\n1: The Destructor (Degats: 50/Prix:5000)\n2: The Ice of King (Degats: 100/Prix: 12 000)\n1 ou 2 ou Exit\n> ")
+    ask_weapon2 = input("Vous voulez qu'elle arme ?\n1: The Destructor (Degats: 50/Prix: 5000)\n2: The Ice of King (Degats: 100/Prix: 12 000)\n3: The Neant (Degats:200/Prix4)0 000:\n1 ou 2 ou 3 Exit\n> ")
     if ask_weapon2 == "1":
         couteau_buy=False
         sword_buy=False
@@ -303,6 +316,20 @@ def marchand_weapon2():
         the_ice_of_king=True
         print("Il vous reste, {}$".format(wallet))
         print("____________________________________________")
+    if ask_weapon2 == "3":
+        if oynix_win == True:
+            couteau_buy=False
+            sword_buy=False
+            pistole_buy=False
+            the_destructor=False
+            wallet -= the_neant_prix
+            the_ice_of_king=False
+            the_neant = True
+            print("Il vous reste, {}$".format(wallet))
+            print("____________________________________________")
+        else:
+            print("Vous n'avez pas vaincu le boss OYNIX")
+            marchand_weapon2()
     if ask_weapon2 == "Exit":
         pass
     
@@ -537,6 +564,7 @@ def quest_checks():
 ### MOBS     
 def fight_blob():
     global healt
+    global the_neant
     global blob_niv1
     global levels_check
     global force
@@ -596,6 +624,8 @@ def fight_blob():
                         blob_niv1 -= 50 * force
                     if the_ice_of_king == True:
                         blob_niv1 -= 100 * force
+                    if the_neant == True:
+                        blob_niv1 -= 200 * force   
                 else:
                     if couteau_buy == True:
                         blob_niv1 -= 5
@@ -607,6 +637,8 @@ def fight_blob():
                         blob_niv1 -= 50
                     if the_ice_of_king == True:
                         blob_niv1 -= 100
+                    if the_neant == True:
+                        blob_niv1 -= 200
                 print("Pv Blob: ",blob_niv1) 
                 print("Il vous attack !")
                 sleep(1)
@@ -682,6 +714,7 @@ def fight_sorcier():
     global levels_check
     global the_destructor
     global the_ice_of_king
+    global the_neant
     global xp
     global wallet
     global couteau_buy
@@ -734,6 +767,8 @@ def fight_sorcier():
                         sorcier_niv1 -= 50 * force
                     if the_ice_of_king == True:
                         sorcier_niv1 -= 100 * force
+                    if the_neant == True:
+                        sorcier_niv1 -= 200 * force
                 else:
                     if couteau_buy == True:
                         sorcier_niv1 -= 5
@@ -745,6 +780,8 @@ def fight_sorcier():
                         sorcier_niv1 -= 50
                     if the_ice_of_king == True:
                         sorcier_niv1 -= 100
+                    if the_neant == True:
+                        sorcier_niv1 -= 200
                 print("Pv Sorcier: ",sorcier_niv1)  
                 print("Il vous attack !")
                 sleep(1)
