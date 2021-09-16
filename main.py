@@ -39,8 +39,8 @@ force_niveaux_10 = False
 resistance_niveaux_10 = False
 
 ### ### XP +
-force = 1
-resistance = 1
+force = 0
+resistance = 0
 
 
 healt = 20
